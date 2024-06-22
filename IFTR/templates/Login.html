@@ -14,7 +14,7 @@
                 <div class="content">
                     <div class="text">Login Form</div>
                     <form method="post">
-                        <input type="hidden" name="csrfmiddlewaretoken" value="37XD3qM6iRhcyAHDKL6IfmNNpvqmkG9fR6tzV6FoDpiXymxs9JnJjdUuQC9aP11j">
+                        {% csrf_token %}
                         <div class="data">
                             <label for="id_login">Email</label>
                             <input type="text" name="email" placeholder="Email" autocomplete="Email" maxlength="150" required id="id_email">
