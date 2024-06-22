@@ -36,3 +36,4 @@ def farmerForm(request):
         farmer_info.save()
         return render(request,'form.html')
     return render(request,'form.html')
+
