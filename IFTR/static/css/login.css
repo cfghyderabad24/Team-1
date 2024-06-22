@@ -16,7 +16,7 @@ body {
 }
 
 .background {
-    background: url('../images/background.jpg') no-repeat center center fixed;
+    background: url('/static/images/home_page.jpg') no-repeat center center fixed;
     background-size: cover;
     height: 100%;
     width: 100%;
