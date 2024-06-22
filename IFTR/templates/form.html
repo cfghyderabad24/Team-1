@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Information Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Farmer Information Form</h1>
+        <form id="farmerForm">
+            
+
+            <fieldset>
+                <legend>Farming Details</legend>
+                <div class="form-group">
+                    <label for="areaPloughed">Area Ploughed (acres):</label>
+                    <input type="number" id="areaPloughed" name="areaPloughed" required>
+                </div>
+                <div class="form-group">
+                    <label for="season">Season:</label>
+                    <input type="text" id="season" name="season" required>
+                </div>
+                <div class="form-group">
+                    <label for="cropGrown">Crop Grown:</label>
+                    <input type="text" id="cropGrown" name="cropGrown" required>
+                </div>
+                <div class="form-group">
+                    <label for="dateSeedSown">Date of Seed Sown:</label>
+                    <input type="date" id="dateSeedSown" name="dateSeedSown" required>
+                </div>
+                <div class="form-group">
+                    <label for="transplanting">Transplanting:</label>
+                        <select id="transplanting" name="transplanting" required>
+                            <option value="manual">Manual</option>
+                            <option value="machine">Machine</option>
+                        </select>
+                    
+                </div>
+                <div class="form-group">
+                    <label for="irrigationMethod">Irrigation Method:</label>
+                    <select id="irrigationMethod" name="irrigationMethod" required>
+                        <option value="borewell">Borewell</option>
+                        <option value="well">Well</option>
+                        <option value="river">Rivers</option>
+                        <option value="dripirrigation">Drip Irrigation</option>
+                    </select>
+                </div>
+                <div class="form-group"> 
+                </div>
+                <div class="form-group">
+                    <label for="fertilizersUsed">Fertilizers Used:</label>
+                    <select id="fertilizersUsed" name="fertilizersUsed" required>
+                        <option value="organic">Organic</option>
+                        <option value="chemical">Chemical</option>
+                        <option value="bioinputs">BioInputs</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dateHarvesting">Date of Harvesting:</label>
+                    <input type="date" id="dateHarvesting" name="dateHarvesting" required>
+                </div>
+                <div class="form-group">
+                    <label for="yieldKg">Yield (kg):</label>
+                    <input type="number" id="yieldKg" name="yieldKg" required>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Seed Used</legend>
+                    
+                    
+                
+                <div class="form-group">
+                    <label for="variety-quantityUsed">Variety-Quantity Used</label>
+                    <input type="text" id="variety-quantityUsed" name="variety-quantityUsed" placeholder="Name-(kg)" required>
+                    
+                </div>
+                
+                <div id="varietyList">
+                    <!-- Varieties will be dynamically added here -->
+                </div>
+            </fieldset>
+
+                
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+</body>
+</html>
