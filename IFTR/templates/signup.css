@@ -1,0 +1,56 @@
+/* Custom CSS styles for the sign-up page */
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.card {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.form-outline input.form-control {
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.btn-primary {
+    background-color: #007BFF; /* Adjust color as needed */
+    border-color: #007BFF; /* Adjust color as needed */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Adjust hover color as needed */
+    border-color: #0056b3; /* Adjust hover color as needed */
+}
+
+.btn-primary:focus, .btn-primary.focus {
+    box-shadow: 0 0 0 0.25rem rgba(38, 143, 255, 0.5); /* Adjust focus shadow as needed */
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+    background-color: #007BFF; /* Adjust disabled color as needed */
+    border-color: #007BFF; /* Adjust disabled color as needed */
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+    background-color: #0056b3; /* Adjust active color as needed */
+    border-color: #0056b3; /* Adjust active color as needed */
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.25rem rgba(38, 143, 255, 0.5); /* Adjust active focus shadow as needed */
+}
+
+/* Additional Styles for Logo and Slogan */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    max-height: 100px; /* Adjust max height of logo as needed */
+}
+
+.h4 {
+    color: hsl(160, 56%, 57%);
+}
+

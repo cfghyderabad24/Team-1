@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Information Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+
+
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+
+/* Container Styles */
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Heading Styles */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Fieldset Styles */
+fieldset {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+/* Legend Styles */
+legend {
+    padding: 0 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Form Group Styles */
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+label {
+    flex: 1;
+    margin-right: 10px;
+    color: #555;
+}
+
+input, select {
+    flex: 2;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Button Styles */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #5cb85c;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    align-self: center;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+</style>
+<body>
+    <div class="container">
+        <h1>Farmer Information Form</h1>
+        <form id="farmerForm" method="post" action="{% url 'form' %}">
+            {% csrf_token %}
+
+            <fieldset>
+                <legend>Farming Details</legend>
+                <div class="form-group">
+                    <label for="areaPloughed">Area Ploughed (acres):</label>
+                    <input type="number" id="areaPloughed" name="areaPloughed" required>
+                </div>
+                <div class="form-group">
+                    <label for="season">Season:</label>
+                    <input type="text" id="season" name="season" required>
+                </div>
+                <div class="form-group">
+                    <label for="cropGrown">Crop Grown:</label>
+                    <input type="text" id="cropGrown" name="cropGrown" required>
+                </div>
+                <div class="form-group">
+                    <label for="dateSeedSown">Date of Seed Sown:</label>
+                    <input type="date" id="dateSeedSown" name="dateSeedSown" required>
+                </div>
+                <div class="form-group">
+                    <label for="transplanting">Transplanting:</label>
+                        <select id="transplanting" name="transplanting" required>
+                            <option value="manual">Manual</option>
+                            <option value="machine">Machine</option>
+                        </select>
+                    
+                </div>
+                <div class="form-group">
+                    <label for="irrigationMethod">Irrigation Method:</label>
+                    <select id="irrigationMethod" name="irrigationMethod" required>
+                        <option value="borewell">Borewell</option>
+                        <option value="well">Well</option>
+                        <option value="river">Rivers</option>
+                        <option value="dripirrigation">Drip Irrigation</option>
+                    </select>
+                </div>
+                <div class="form-group"> 
+                </div>
+                <div class="form-group">
+                    <label for="fertilizersUsed">Fertilizers Used:</label>
+                    <select id="fertilizersUsed" name="fertilizersUsed" required>
+                        <option value="organic">Organic</option>
+                        <option value="chemical">Chemical</option>
+                        <option value="bioinputs">BioInputs</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dateHarvesting">Date of Harvesting:</label>
+                    <input type="date" id="dateHarvesting" name="dateHarvesting" required>
+                </div>
+                <div class="form-group">
+                    <label for="yieldKg">Yield (kg):</label>
+                    <input type="number" id="yieldKg" name="yieldKg" required>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Seed Used</legend>
+                    
+                    
+                
+                <div class="form-group">
+                    <label for="variety-quantityUsed">Variety-Quantity Used</label>
+                    <input type="text" id="variety-quantityUsed" name="variety-quantityUsed" placeholder="Name-(kg)" required>
+                    
+                </div>
+                
+                <div id="varietyList">
+                    <!-- Varieties will be dynamically added here -->
+                </div>
+            </fieldset>
+
+                
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="{% static '/css/styles.css' %}" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="background2">
+        <div class="overlay">
+            <div class="container">
+                <div class="content">
+                    <div class="text">Sign Up</div>
+                    <form method="post" action="signup" methon ="post">
+                        {% csrf_token %}
+                        <div class="data">
+                            <label for="id_login">Username</label>
+                            <input type="text" name="username" placeholder="Username" autocomplete="username" maxlength="150" required id="id_login">
+                        </div>
+                        <div class="data">
+                            <label for="id_login">Farmer's Name</label>
+                            <input type="text" name="name" placeholder="Username" autocomplete="username" maxlength="150" required id="id_login">
+                        </div>
+                        <div class="data">
+                            <label for="id_login">Pincode</label>
+                            <input type="text" name="pincode" placeholder="Username" autocomplete="username" maxlength="150" required id="id_login">
+                        </div>
+                        <div class="data">
+                            <label for="id_login">Aadhar Number</label>
+                            <input type="text" name="aadhaar" placeholder="Username" autocomplete="username" maxlength="150" required id="id_login">
+                        </div>
+                        <div class="data">
+                            <label for="id_login">Contact Number</label>
+                            <input type="text" name="contact" placeholder="Username" autocomplete="username" maxlength="150" required id="id_login">
+                        </div>
+                        
+                        <div class="data">
+                            <label for="id_login">Email</label>
+                            <input type="text" name="email" placeholder="Email" autocomplete="Email" maxlength="150" required id="id_email">
+                        </div>
+                        <div class="data">
+                            <label for="id_password">Password</label>
+                            <input type="password" name="password" placeholder="Password" autocomplete="current-password" required id="id_password">
+                        </div>
+                        <div class="data">
+                            <label for="id_password">Confirm Password</label>
+                            <input type="password" name="confirm_password" placeholder="Password" autocomplete="current-password" required id="id_password">
+                        </div>
+                        <div style="margin: 10px;"><a style="color: rgb(255, 25, 25);" href="/accounts/password/reset/">Forgot Password</a></div>
+                        <button class="btn btn1" style="margin: 10px;" type="submit">Login</button>
+                        <div >
+                            Not a member? <a href="login.html" style="color: rgb(38, 255, 0);">Login </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
