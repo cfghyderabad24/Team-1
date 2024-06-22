@@ -2,6 +2,12 @@ from django.shortcuts import render
 from django.contrib.auth.models import User,auth
 from accounts.models import *
 # Create your views here.
+
+def signup(request):
+    return render(request,'signup.html')
+def login(request):
+    return render(request,'login.html')
+
 def farmerForm(request):
     user = User.objects.filter(username="admin")[0]
     print(user.pk)

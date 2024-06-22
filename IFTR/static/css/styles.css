@@ -7,7 +7,7 @@ body, html {
 }
 
 .background {
-    background: url('../images/background.jpg') no-repeat center center fixed;
+    background: url('/static/images/home_page.jpg') no-repeat center center fixed;
     background-size: cover;
     height: 100%;
     width: 100%;
@@ -17,7 +17,7 @@ body, html {
 }
 
 .background2 {
-    background: url('../images/background2.jpg') no-repeat center center fixed;
+    background: url('/static/images/bg2.jpg') no-repeat center center fixed;
     background-size: cover;
     height: 100%;
     width: 100%;
