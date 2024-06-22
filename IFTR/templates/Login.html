@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="{% static '/css/styles.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <div class="background2">
+        <div class="overlay">
+            <div class="container">
+                <div class="content">
+                    <div class="text">Login Form</div>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="data">
+                            <label for="id_login">Email</label>
+                            <input type="text" name="email" placeholder="Email" autocomplete="Email" maxlength="150" required id="id_email">
+                        </div>
+                        <div class="data">
+                            <label for="id_password">Password</label>
+                            <input type="password" name="password" placeholder="Password" autocomplete="current-password" required id="id_password">
+                        </div>
+                        <div style="margin: 10px;"><a style="color: rgb(255, 25, 25);" href="/accounts/password/reset/">Forgot Password</a></div>
+                        <button class="btn btn1" style="margin: 10px;" type="submit">Login
+                        </button>
+                        <div >
+                            Not a member? <a href="signup.html" style="color: rgb(38, 255, 0);">Signup now</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
