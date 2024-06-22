@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farmer Information Form</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <style>
 
@@ -99,39 +100,43 @@ button:hover {
 
 </style>
 <body>
+    <h2 id="select-label">Select Language</h2>
+    <select id="language-select">
+        <option value="en">English</option>
+        <option value="tel">Telugu</option>
+    </select>
     <div class="container">
         <h1>Farmer Information Form</h1>
         <form id="farmerForm" method="post" action="{% url 'form' %}">
             {% csrf_token %}
 
             <fieldset>
-                <legend>Farming Details</legend>
+                <legend id="farming-details-legend">Farming Details</legend>
                 <div class="form-group">
-                    <label for="areaPloughed">Area Ploughed (acres):</label>
-                    <input type="number" id="areaPloughed" name="areaPloughed" required>
+                    <label for="areaPloughed" id="area-label">Area Ploughed (acres):</label>
+                    <input type="number" id="areaPloughed" name="areaPloughed" required placeholder="Area Ploughed (acres)">
                 </div>
                 <div class="form-group">
-                    <label for="season">Season:</label>
-                    <input type="text" id="season" name="season" required>
+                    <label for="season" id="season-label">Season:</label>
+                    <input type="text" id="season" name="season" required placeholder="Season">
                 </div>
                 <div class="form-group">
-                    <label for="cropGrown">Crop Grown:</label>
-                    <input type="text" id="cropGrown" name="cropGrown" required>
+                    <label for="cropGrown" id="cropGrown-label">Crop Grown:</label>
+                    <input type="text" id="cropGrown" name="cropGrown" required placeholder="Crop Grown">
                 </div>
                 <div class="form-group">
-                    <label for="dateSeedSown">Date of Seed Sown:</label>
+                    <label for="dateSeedSown" id="dateSeedSown-label">Date of Seed Sown:</label>
                     <input type="date" id="dateSeedSown" name="dateSeedSown" required>
                 </div>
                 <div class="form-group">
-                    <label for="transplanting">Transplanting:</label>
-                        <select id="transplanting" name="transplanting" required>
-                            <option value="manual">Manual</option>
-                            <option value="machine">Machine</option>
-                        </select>
-                    
+                    <label for="transplanting" id="transplanting-label">Transplanting:</label>
+                    <select id="transplanting" name="transplanting" required>
+                        <option value="manual">Manual</option>
+                        <option value="machine">Machine</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="irrigationMethod">Irrigation Method:</label>
+                    <label for="irrigationMethod" id="irrigationMethod-label">Irrigation Method:</label>
                     <select id="irrigationMethod" name="irrigationMethod" required>
                         <option value="borewell">Borewell</option>
                         <option value="well">Well</option>
@@ -139,10 +144,8 @@ button:hover {
                         <option value="dripirrigation">Drip Irrigation</option>
                     </select>
                 </div>
-                <div class="form-group"> 
-                </div>
                 <div class="form-group">
-                    <label for="fertilizersUsed">Fertilizers Used:</label>
+                    <label for="fertilizersUsed" id="fertilizersUsed-label">Fertilizers Used:</label>
                     <select id="fertilizersUsed" name="fertilizersUsed" required>
                         <option value="organic">Organic</option>
                         <option value="chemical">Chemical</option>
@@ -150,34 +153,198 @@ button:hover {
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="dateHarvesting">Date of Harvesting:</label>
+                    <label for="dateHarvesting" id="dateHarvesting-label">Date of Harvesting:</label>
                     <input type="date" id="dateHarvesting" name="dateHarvesting" required>
                 </div>
                 <div class="form-group">
-                    <label for="yieldKg">Yield (kg):</label>
-                    <input type="number" id="yieldKg" name="yieldKg" required>
+                    <label for="yieldKg" id="yieldKg-label">Yield (kg):</label>
+                    <input type="number" id="yieldKg" name="yieldKg" required placeholder="Yield (kg)">
                 </div>
             </fieldset>
             <fieldset>
-                <legend>Seed Used</legend>
-                    
-                    
-                
+                <legend id="seed-used-legend">Seed Used</legend>
                 <div class="form-group">
-                    <label for="variety-quantityUsed">Variety-Quantity Used</label>
-                    <input type="text" id="variety-quantityUsed" name="variety-quantityUsed" placeholder="Name-(kg)" required>
-                    
-                </div>
-                
-                <div id="varietyList">
-                    <!-- Varieties will be dynamically added here -->
+                    <label for="variety-quantityUsed" id="variety-quantityUsed-label">Variety-Quantity Used:</label>
+                    <input type="text" id="variety-quantityUsed" name="variety-quantityUsed" required placeholder="Name-(kg)">
                 </div>
             </fieldset>
-
-                
-            <button type="submit">Submit</button>
+            <button type="submit" id="submit-button">Submit</button>
         </form>
     </div>
+    <div class="container">
+        <h2>Data Visualization</h2>
+        <canvas id="dataChart"></canvas>
+    </div>
+    <script>
+      const translation = {
+            en: {
+                select: "Select Language",
+                formTitle: "Farmer Information Form",
+                farmingDetailsLegend: "Farming Details",
+                area: "Area Ploughed (acres):",
+                season: "Season:",
+                cropGrown: "Crop Grown:",
+                dateSeedSown: "Date of Seed Sown:",
+                transplanting: "Transplanting:",
+                irrigationMethod: "Irrigation Method:",
+                fertilizersUsed: "Fertilizers Used:",
+                dateHarvesting: "Date of Harvesting:",
+                yieldKg: "Yield (kg):",
+                varietyQuantityUsed: "Variety-Quantity Used:",
+                seedUsedLegend: "Seed Used",
+                submitButton: "Submit",
+                placeholders: {
+                    area: "Area Ploughed (acres)",
+                    season: "Season",
+                    cropGrown: "Crop Grown",
+                    yieldKg: "Yield (kg)",
+                    varietyQuantityUsed: "Name-(kg)"
+                },
+                options: {
+                    transplanting: ["Manual", "Machine"],
+                    irrigationMethod: ["Borewell", "Well", "Rivers", "Drip Irrigation"],
+                    fertilizersUsed: ["Organic", "Chemical", "BioInputs"]
+                }
+            },
+            tel: {
+                select: "భాషను ఎంచుకోండి",
+                formTitle: "రైతు సమాచార ఫారం",
+                farmingDetailsLegend: "వ్యవసాయ వివరాలు",
+                area: "దున్నిన విస్తీర్ణం (ఎకరాలు):",
+                season: "సీజన్:",
+                cropGrown: "పండించిన పంట:",
+                dateSeedSown: "విత్తనం వేసిన తేదీ:",
+                transplanting: "నాటడం:",
+                irrigationMethod: "నీరుపారుదల పద్ధతి:",
+                fertilizersUsed: "వాడిన ఎరువులు:",
+                dateHarvesting: "పంట తీయు తేదీ:",
+                yieldKg: "ఉత్పత్తి (కిలోలు):",
+                varietyQuantityUsed: "వైవిధ్యం-వాడిన పరిమాణం:",
+                seedUsedLegend: "విత్తనాలు వాడినవి",
+                submitButton: "సమర్పించు",
+                placeholders: {
+                    area: "దున్నిన విస్తీర్ణం (ఎకరాలు)",
+                    season: "సీజన్",
+                    cropGrown: "పండించిన పంట",
+                    yieldKg: "ఉత్పత్తి (కిలోలు)",
+                    varietyQuantityUsed: "వైవిధ్యం-వాడిన పరిమాణం"
+                },
+                options: {
+                    transplanting: ["మాన్యువల్", "మెషిన్"],
+                    irrigationMethod: ["బోరువెల్", "వెల్", "నదులు", "డ్రిప్ ఇరిగేషన్"],
+                    fertilizersUsed: ["ఆర్గానిక్", "కెమికల్", "బయోఇన్‌పుట్స్"]
+                }
+            }
+        };
+
+const languageselection = document.querySelector("#language-select");
+languageselection.addEventListener("change", (event) => {
+    setLanguage(event.target.value);
+});
+
+const setLanguage = (language) => {
+    const selectLabel = document.getElementById("select-label");
+    const formTitle = document.getElementById("form-title");
+    const farmingDetailsLegend = document.getElementById("farming-details-legend");
+    const seedUsedLegend = document.getElementById("seed-used-legend");
+    const submitButton = document.getElementById("submit-button");
+
+    const placeholders = translation[language].placeholders;
+
+    if (translation[language]) {
+        selectLabel.textContent = translation[language].select;
+        formTitle.textContent = translation[language].formTitle;
+        farmingDetailsLegend.textContent = translation[language].farmingDetailsLegend;
+        seedUsedLegend.textContent = translation[language].seedUsedLegend;
+        submitButton.textContent = translation[language].submitButton;
+
+        document.getElementById("areaPloughed").placeholder = placeholders.area;
+        document.getElementById("season").placeholder = placeholders.season;
+        document.getElementById("cropGrown").placeholder = placeholders.cropGrown;
+        document.getElementById("yieldKg").placeholder = placeholders.yieldKg;
+        document.getElementById("variety-quantityUsed").placeholder = placeholders.varietyQuantityUsed;
+
+        document.getElementById("area-label").textContent = translation[language].area;
+        document.getElementById("season-label").textContent = translation[language].season;
+        document.getElementById("cropGrown-label").textContent = translation[language].cropGrown;
+        document.getElementById("dateSeedSown-label").textContent = translation[language].dateSeedSown;
+        document.getElementById("transplanting-label").textContent = translation[language].transplanting;
+        document.getElementById("irrigationMethod-label").textContent = translation[language].irrigationMethod;
+        document.getElementById("fertilizersUsed-label").textContent = translation[language].fertilizersUsed;
+        document.getElementById("dateHarvesting-label").textContent = translation[language].dateHarvesting;
+        document.getElementById("yieldKg-label").textContent = translation[language].yieldKg;
+        document.getElementById("variety-quantityUsed-label").textContent = translation[language].varietyQuantityUsed;
+    }
+};
+
+// Handle form submission
+document.getElementById('farmerForm').addEventListener('submit', function(event) {
+    event.preventDefault();
     
+    const areaPloughed = document.getElementById('areaPloughed').value;
+    const irrigationMethod = document.getElementById('irrigationMethod').value;
+    const fertilizersUsed = document.getElementById('fertilizersUsed').value;
+    const yieldKg = document.getElementById('yieldKg').value;
+
+    // Convert categorical data to numeric
+    const irrigationMethods = {
+        borewell: 1,
+        well: 2,
+        river: 3,
+        dripirrigation: 4
+    };
+
+    const fertilizersUsedOptions = {
+        organic: 1,
+        chemical: 2,
+        bioinputs: 3
+    };
+
+    // Get numeric values for chart
+    const irrigationMethodValue = irrigationMethods[irrigationMethod];
+    const fertilizersUsedValue = fertilizersUsedOptions[fertilizersUsed];
+
+    // Update chart data
+    updateChart(areaPloughed, irrigationMethodValue, yieldKg, fertilizersUsedValue);
+});
+
+// Function to update chart with form data
+const updateChart = (areaPloughed, irrigationMethod, yieldKg, fertilizersUsed) => {
+    const ctx = document.getElementById('dataChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Area Ploughed (acres)', 'Irrigation Method', 'Yield (kg)', 'Fertilizers Used'],
+            datasets: [{
+                label: 'Farming Data',
+                data: [areaPloughed, irrigationMethod, yieldKg, fertilizersUsed],
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.2)', 
+                    'rgba(54, 162, 235, 0.2)', 
+                    'rgba(255, 206, 86, 0.2)', 
+                    'rgba(153, 102, 255, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)', 
+                    'rgba(54, 162, 235, 1)', 
+                    'rgba(255, 206, 86, 1)', 
+                    'rgba(153, 102, 255, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+};
+
+// Set default language on page load
+setLanguage('en');
+</script>
 </body>
 </html>
